@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.Models;
@@ -19,19 +20,19 @@ namespace WebApplication1.Controllers
         {
             return this.clientcontext.Clients.ToList(); 
         }
-
+        
         [HttpGet]
         [Route("{id}")]
         public Client GetClient(int id)
         {
-            return this.clientcontext.Clients.Find(id);
+            return this.clientcontext.Clients.Find(id); 
         }
-
+        
         [HttpGet]
-        [Route("{mac}")]
-        public Client GetClient(int mac_address)
+        [Route("mac/{mac_address}")]
+        public Client GetClient(string mac_address)
         {
-            return this.clientcontext.Clients.Find(mac_address);
+            return this.clientcontext.Clients.SingleOrDefault(client => client.mac_address == mac_address);
         }
 
         [HttpPost]
@@ -62,8 +63,15 @@ namespace WebApplication1.Controllers
         public void Delete(int id)
         {
             Client client = this.clientcontext.Clients.Find(id);
-            this.clientcontext.Clients.Remove(client);
-            this.clientcontext.SaveChanges();
+            try
+            {
+                this.clientcontext.Clients.Remove(client);
+                this.clientcontext.SaveChanges();
+            }
+            catch (System.ArgumentNullException)
+            {
+                Debug.WriteLine("Client cannot be removed because it does not exist.");
+            }
         }
     }
 }
