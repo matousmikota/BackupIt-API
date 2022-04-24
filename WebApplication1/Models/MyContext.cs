@@ -10,6 +10,7 @@ namespace WebApplication1.Models
 {
     public class MyContext : DbContext
     {
+        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
 
        // public virtual DbSet<ClientConfig> CConfigs { get; set; }
