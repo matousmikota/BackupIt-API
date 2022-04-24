@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 namespace WebApplication1.Models
 {
     public class AuthenticationService
-    {/*
+    {
         const string SECRET = "foo-bar";
 
         private MyContext context = new MyContext();
 
         public string Authenticate(Credentials credentials)
         {
-            User user = this.context.Users.Where(x => x.Login == credentials.Login && x.Password == credentials.Password).FirstOrDefault();
+            Admin admin = this.context.Admins.Where(x => x.login == credentials.Login && x.password == credentials.Password).FirstOrDefault();
 
-            if (user == null)
-                throw new Exception("invalid user");
+            if (admin == null)
+                throw new Exception("invalid admin");
 
             return JwtBuilder.Create()
                       .WithAlgorithm(new HMACSHA256Algorithm()) // symmetric
                       .WithSecret(SECRET)
                       .AddClaim("exp", DateTimeOffset.UtcNow.AddSeconds(30).ToUnixTimeSeconds())
-                      .AddClaim("user_id", user.Id)
+                      .AddClaim("user_id", admin.Id)
                       .Encode();
         }
 
@@ -44,6 +44,6 @@ namespace WebApplication1.Models
             {
                 return false;
             }
-        }*/
+        }
     }
 }
