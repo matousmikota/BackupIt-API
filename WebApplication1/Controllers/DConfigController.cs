@@ -15,13 +15,13 @@ namespace WebApplication1.Controllers
         private MyContext DConfigcontext = new MyContext();
 
         [HttpGet]
-        public List<Configs_Destinations> GetDConfigs()
+        public List<ConfigDestination> GetDConfigs()
         {
             return this.DConfigcontext.DConfigs.ToList();
         }
 
         [HttpPost]
-        public Configs_Destinations Create(Configs_Destinations config)
+        public ConfigDestination Create(ConfigDestination config)
         {
             this.DConfigcontext.DConfigs.Add(config);
             this.DConfigcontext.SaveChanges();
@@ -30,22 +30,21 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public void Update(int id, Configs_Destinations config)
+        [Route("{configid}")]
+        public void Update(int configid, ConfigDestination config)
         {
-            Configs_Destinations db = this.DConfigcontext.DConfigs.Find(id);
-            db.id = config.id;
-            db.destination_id = config.destination_id;
-            db.config_id = config.config_id;
+            ConfigDestination db = this.DConfigcontext.DConfigs.Find(configid);
+            db.destinationid = config.destinationid;
+            db.configid = config.configid;
 
             this.DConfigcontext.SaveChanges();
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public void Delete(int id)
+        [Route("{configid}")]
+        public void Delete(int configid)
         {
-            Configs_Destinations config = this.DConfigcontext.DConfigs.Find(id);
+            ConfigDestination config = this.DConfigcontext.DConfigs.Find(configid);
             this.DConfigcontext.DConfigs.Remove(config);
             this.DConfigcontext.SaveChanges();
         }

@@ -17,7 +17,7 @@ namespace WebApplication1.Models
 
         public virtual DbSet<Config> Configs { get; set; }
 
-        public virtual DbSet<Configs_Destinations> DConfigs { get; set; }
+        public virtual DbSet<ConfigDestination> DConfigs { get; set; }
         
         public virtual DbSet<Destinations> Destinations { get; set; }
 
