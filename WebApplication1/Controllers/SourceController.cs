@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.Models;
+using System.Threading;
 
 namespace WebApplication1.Controllers
 {
@@ -24,8 +25,28 @@ namespace WebApplication1.Controllers
         public Sources Create(Sources source)
         {
             this.Sourcecontext.Sources.Add(source);
-            this.Sourcecontext.SaveChanges();
-
+            try
+            {
+                this.Sourcecontext.SaveChanges();
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException)
+            {
+                Thread.Sleep(1000);
+                try
+                {
+                    this.Sourcecontext.SaveChanges();
+                }
+                catch (Microsoft.EntityFrameworkCore.DbUpdateException)
+                {
+                    Thread.Sleep(2500);
+                    try
+                    {
+                        this.Sourcecontext.SaveChanges();
+                    }
+                    catch (Microsoft.EntityFrameworkCore.DbUpdateException) { }
+                    this.Sourcecontext.SaveChanges();
+                }   
+            }
             return source;
         }
 
