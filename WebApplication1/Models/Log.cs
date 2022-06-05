@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore;
 namespace WebApplication1.Models
 {
 
-    [Table("Logs")]
-    public class Logs
+    [Table("Log")]
+    public class Log
     {
         [Key]
         public int Id { get; set; }

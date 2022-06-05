@@ -10,12 +10,12 @@ using Org.BouncyCastle.Asn1;
 namespace WebApplication1.Models
 {
 
-    [Table("ConfigDestination")]
-    public class ConfigDestination
+    [Table("DestinationConfig")]
+    public class DestinationConfig
     {
-        
-        public int destinationid { get; set; }
         [Key]
+        public int id { get; set; }
+        public int destinationid { get; set; }
         public int configid { get; set; }
 
     }

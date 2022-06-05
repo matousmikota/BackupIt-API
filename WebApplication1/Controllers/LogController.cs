@@ -10,20 +10,20 @@ namespace WebApplication1.Controllers
 {
     [Route("data/[controller]")]
     [ApiController]
-    public class LogsController : ControllerBase
+    public class LogController : ControllerBase
     {
         private MyContext Logcontext = new MyContext();
 
         [HttpGet]
-        public List<Logs> GetLogs()
+        public List<Log> GetLogs()
         {
-            return this.Logcontext.Logs.ToList();
+            return this.Logcontext.Log.ToList();
         }
 
         [HttpPost]
-        public Logs PublishLog(Logs log)
+        public Log PublishLog(Log log)
         {
-            this.Logcontext.Logs.Add(log);
+            this.Logcontext.Log.Add(log);
             this.Logcontext.SaveChanges();
 
             return log;

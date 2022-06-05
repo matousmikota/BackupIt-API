@@ -32,7 +32,15 @@ namespace WebApplication1.Controllers
         [Route("mac/{mac_address}")]
         public Client GetClient(string mac_address)
         {
-            return this.clientcontext.Clients.SingleOrDefault(client => client.mac_address == mac_address);
+            try
+            {
+                return this.clientcontext.Clients.SingleOrDefault(client => client.mac_address == mac_address);
+            }
+            catch (System.InvalidOperationException)
+            {
+                return this.clientcontext.Clients.FirstOrDefault(client => client.mac_address == mac_address);
+            }
+
         }
 
         [HttpPost]

@@ -29,6 +29,7 @@ namespace WebApplication1.Controllers
             {
                 this.Sourcecontext.SaveChanges();
             }
+            catch (MySql.Data.MySqlClient.MySqlException) { }
             catch (Microsoft.EntityFrameworkCore.DbUpdateException)
             {
                 Thread.Sleep(1000);

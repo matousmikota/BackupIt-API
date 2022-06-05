@@ -17,11 +17,11 @@ namespace WebApplication1.Models
 
         public virtual DbSet<Config> Configs { get; set; }
 
-        public virtual DbSet<ConfigDestination> DConfigs { get; set; }
+        public virtual DbSet<DestinationConfig> DConfigs { get; set; }
         
         public virtual DbSet<Destinations> Destinations { get; set; }
 
-        public virtual DbSet<Logs> Logs { get; set; }
+        public virtual DbSet<Log> Log { get; set; }
 
         public virtual DbSet<Sources> Sources { get; set; }
 

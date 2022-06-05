@@ -15,25 +15,30 @@ namespace WebApplication1.Controllers
         private MyContext DConfigcontext = new MyContext();
 
         [HttpGet]
-        public List<ConfigDestination> GetDConfigs()
+        public List<DestinationConfig> GetDConfigs()
         {
             return this.DConfigcontext.DConfigs.ToList();
         }
 
         [HttpPost]
-        public ConfigDestination Create(ConfigDestination config)
+        public DestinationConfig Create(DestinationConfig config)
         {
             this.DConfigcontext.DConfigs.Add(config);
-            this.DConfigcontext.SaveChanges();
+            try
+            {
+                this.DConfigcontext.SaveChanges();
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException) { }
+            
 
             return config;
         }
 
         [HttpPut]
         [Route("{configid}")]
-        public void Update(int configid, ConfigDestination config)
+        public void Update(int configid, DestinationConfig config)
         {
-            ConfigDestination db = this.DConfigcontext.DConfigs.Find(configid);
+            DestinationConfig db = this.DConfigcontext.DConfigs.Find(configid);
             db.destinationid = config.destinationid;
             db.configid = config.configid;
 
@@ -44,7 +49,7 @@ namespace WebApplication1.Controllers
         [Route("{configid}")]
         public void Delete(int configid)
         {
-            ConfigDestination config = this.DConfigcontext.DConfigs.Find(configid);
+            DestinationConfig config = this.DConfigcontext.DConfigs.Find(configid);
             this.DConfigcontext.DConfigs.Remove(config);
             this.DConfigcontext.SaveChanges();
         }
